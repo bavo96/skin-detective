@@ -142,7 +142,8 @@ def get_heatmap(
   if url:
     pil_img = url_to_img(url)
 
-  result = get_gradcam(pil_img, class_name)
+#   result = get_gradcam(pil_img, class_name)
+  result = {"heatmap":""}
   return {"result": result}
 
 
