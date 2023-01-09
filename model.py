@@ -5,6 +5,7 @@ import gdown
 import os
 # from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 # from pytorch_grad_cam import GradCAM
+import cv2
 import base64
 import numpy as np
 from PIL import Image
