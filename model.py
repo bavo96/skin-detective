@@ -3,8 +3,8 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 import gdown
 import os
-from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
-from pytorch_grad_cam import GradCAM
+# from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
+# from pytorch_grad_cam import GradCAM
 import base64
 import numpy as np
 from PIL import Image
@@ -30,8 +30,8 @@ model = torch.load('./model.pt', map_location='cpu')
 gradcam_model = torch.load('./model.pt', map_location='cpu')
 
 # Grad cam init
-target_layers = [gradcam_model.layer4[-1]]
-cam = GradCAM(model=gradcam_model, target_layers=target_layers, use_cuda=False)
+# target_layers = [gradcam_model.layer4[-1]]
+# cam = GradCAM(model=gradcam_model, target_layers=target_layers, use_cuda=False)
 
 # Preprocess
 transform = transforms.Compose(
@@ -70,25 +70,26 @@ def get_prediction(image, thres=0):
 
 def get_gradcam(image, class_name):
 
-  batch_size = 1
-  trans_img = transform(image)
-  trans_img = trans_img.view(1, 3, img_size[0], img_size[1])
+#   batch_size = 1
+#   trans_img = transform(image)
+#   trans_img = trans_img.view(1, 3, img_size[0], img_size[1])
 
-  class_index = label2id[class_name]
-  print(class_index)
-  targets = [ClassifierOutputTarget(class_index)]
+#   class_index = label2id[class_name]
+#   print(class_index)
+#   targets = [ClassifierOutputTarget(class_index)]
 
-  grayscale_cam = cam(input_tensor=trans_img, targets=targets)
-  grayscale_cam = grayscale_cam[0, :]
+#   grayscale_cam = cam(input_tensor=trans_img, targets=targets)
+#   grayscale_cam = grayscale_cam[0, :]
 
-  grayscale_cam_image = (grayscale_cam*255).astype(np.uint8)
-  grayscale_cam_image = Image.fromarray(grayscale_cam_image, 'L')
+#   grayscale_cam_image = (grayscale_cam*255).astype(np.uint8)
+#   grayscale_cam_image = Image.fromarray(grayscale_cam_image, 'L')
 
-  #base64_image = base64.b64encode(cv2.imencode('.jpg', grayscale_cam_image)[1]).decode()
+#   #base64_image = base64.b64encode(cv2.imencode('.jpg', grayscale_cam_image)[1]).decode()
 
-  buffered = BytesIO()
-  grayscale_cam_image.save(buffered, format="JPEG")
-  base64_image = base64.b64encode(buffered.getvalue())
+#   buffered = BytesIO()
+#   grayscale_cam_image.save(buffered, format="JPEG")
+#   base64_image = base64.b64encode(buffered.getvalue())
+  base64_image = ""
   result = {'heatmap': base64_image}
 
   return result
