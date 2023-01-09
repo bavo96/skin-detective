@@ -11,9 +11,6 @@ from io import BytesIO
 from PIL import Image
 from model import get_prediction, get_gradcam
 
-from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
-from pytorch_grad_cam import GradCAM
-
 
 def url_to_img(url, save=True):
   img = Image.open(BytesIO(requests.get(url).content))
